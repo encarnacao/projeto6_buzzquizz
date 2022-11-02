@@ -7,6 +7,10 @@
     padding: 40px 0;
 }
 
+ul {
+    width: 100%;
+}
+
 .campos-de-texto,
 .pergunta,
 .nivel {
@@ -16,8 +20,14 @@
     justify-content: center;
     width: 100%;
     padding: 24px 16px;
-    transition: height 0.5s linear;
+    height: 100%;
 }
+
+.campos-de-texto{
+    transition: max-height 2000ms ease-in-out;
+    max-height: 100%;
+}
+
 
 .comeco .campos-de-texto,
 .pergunta,
@@ -74,8 +84,8 @@ section h1{
     height: 180px;
 }
 
-.collapsed{
-    height: 0px;
+.campos-de-texto.collapsed{
+    max-height: 0px;
     margin: 0px;
     padding: 0px;
 }
@@ -87,6 +97,7 @@ section h1{
     display: none;
 }
 
+
 .voltar{
     font-size: 18px;
     color: #818181;
@@ -95,4 +106,8 @@ section h1{
     align-items: center;
     justify-content: center;
     margin-top: 9px;
+}
+
+a {
+    text-decoration: none;
 }
