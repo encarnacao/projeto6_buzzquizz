@@ -31,11 +31,23 @@ header h1 {
 
 main {
     margin: 69px auto 0 auto;
+    height: 100vh;
 }
 
 h1 {
     font-size: 20px;
     font-weight: 700;
+}
+
+button {
+    background: #EC362D;
+    border-radius: 15px;
+    border: none;
+    width: 85%;
+    height: 54px;
+    color: #fff5F4;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .hidden {

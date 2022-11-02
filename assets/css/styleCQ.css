@@ -1,25 +1,58 @@
-.container {
-    height: 90px;
+.input-container {
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 0;
 }
 
-.campos-de-texto{
+.campos-de-texto,
+.pergunta,
+.nivel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
     width: 100%;
     padding: 24px 16px;
-    background: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    transition: height 0.5s linear;
 }
 
-.campos-de-texto input{
+.comeco .campos-de-texto,
+.pergunta,
+.nivel {
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    margin: 29px 0px;
+}
+
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 16px;
+}
+
+section h1{
+    margin: 12px 0px 12px 0px;
+}
+
+.resposta{
+    margin: 20px 0px 30px 0px;
+}
+
+.resposta:last-child{
+    margin-bottom: 0px;
+}
+
+.titulo ion-icon{
+    font-size: 26px;
+    --ionicon-stroke-width: 40px;
+    color: #000;
+}
+
+.campos-de-texto input {
     width: 100%;
     height: 46px;
     border: 1px solid #D1D1D1;
@@ -29,7 +62,16 @@
     font-size: 19px;
 }
 
-.campos-de-texto input::placeholder{
+.campos-de-texto input::placeholder {
     color: #bababa;
     font-style: italic;
+}
+
+.collapsed{
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+.collapsed *{
+    display: none;
 }
