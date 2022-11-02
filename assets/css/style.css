@@ -50,6 +50,51 @@ button {
     cursor: pointer;
 }
 
+.quizz-image{
+    position: relative;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.quizz-image:after{
+    /*Copiei de um exemplo na internet e torci pra dar certo*/
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 99%;
+    /*Por motivos desconhecidos pra mim até então, se usar height: 100% ultrapassa a imagem*/
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.5) 65.62%, rgba(0,0,0,0.8) 100%);
+    border-radius: 5px;
+}
+
+.quizz-image img{
+    width: 100%;
+    height: 100%;
+    /*Força o aspect ratio da imagem pra manter ela em paisagem*/
+    aspect-ratio: 16/9;
+    border-radius: 5px;
+}
+
+.quizz-image .titulo-quizz{
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    padding: 15px;
+    font-size: 19px;
+    text-align: center;
+    line-height: 22px;
+    align-items: center;
+    /*z-index para ficar por cima do gradiente, manter abaixo do z-index do header*/
+    z-index: 1;
+}
+
 .hidden {
     display: none;
 }
+

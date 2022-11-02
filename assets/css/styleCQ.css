@@ -52,19 +52,26 @@ section h1{
     color: #000;
 }
 
-.campos-de-texto input {
+.campos-de-texto input,.campos-de-texto textarea{
     width: 100%;
-    height: 46px;
     border: 1px solid #D1D1D1;
     border-radius: 5px;
-    padding: 0 16px;
+    padding: 14px 15px;
     margin-bottom: 9px;
     font-size: 19px;
+    font-family: 'Roboto', sans-serif;
 }
 
-.campos-de-texto input::placeholder {
+.campos-de-texto input::placeholder, .campos-de-texto textarea::placeholder{
     color: #bababa;
     font-style: italic;
+}
+
+.campos-de-texto input{
+    height: 46px;
+}
+.campos-de-texto textarea{
+    height: 180px;
 }
 
 .collapsed{
@@ -74,4 +81,18 @@ section h1{
 }
 .collapsed *{
     display: none;
+}
+
+.hide-icon ion-icon{
+    display: none;
+}
+
+.voltar{
+    font-size: 18px;
+    color: #818181;
+    height: 44px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 9px;
 }
