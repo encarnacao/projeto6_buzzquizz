@@ -63,6 +63,7 @@ main, .YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes
         width: 31px;
         height: 30px;
         color: #EC362D;
+        cursor: pointer;
     }
 
 
