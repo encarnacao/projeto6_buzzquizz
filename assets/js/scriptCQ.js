@@ -3,7 +3,7 @@ const startScreen = document.querySelector('.comeco');
 const questionScreen = document.querySelector('.perguntas');
 const levelsScreen = document.querySelector(".niveis");
 const endScreen = document.querySelector(".quizz-pronto");
-/*Lista de perguntas e níveeis*/
+/*Lista de perguntas e níveis*/
 const questionList = document.querySelector(".perguntas ul");
 const levelsList = document.querySelector(".niveis ul");
 /*Modelos de pergunta e nível*/
