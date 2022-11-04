@@ -11,36 +11,50 @@ const questionTemplate = `
 <div class="campos-de-texto">
 <section>
     <input type="text" autocomplete="off" class="question" placeholder="Texto da pergunta">
+    <p class="error hidden">A pergunta deve ter no mínimo 20 caracteres</p>
     <input type="text" autocomplete="off" class="color" placeholder="Cor de fundo da pergunta">
+    <p class="error hidden">Não é uma cor válida</p>
 </section>
 <section>
     <h1>Resposta correta</h1>
     <div class="resposta">
         <input type="text" autocomplete="off" class="answer" placeholder="Resposta correta">
+        <p class="error hidden">É necessário ter pelo menos uma resposta correta</p>
         <input type="text" autocomplete="off" class="image" placeholder="Url da Imagem">
+        <p class="error hidden">O valor informado não é uma URL válida</p>
     </div>
 </section>
 <section>
     <h1>Respostas incorretas</h1>
     <div class="resposta">
         <input type="text" autocomplete="off" class="answer" placeholder="Resposta incorreta 1">
+        <p class="error hidden">É necessário ter pelo menos uma resposta incorreta</p>
         <input type="text" autocomplete="off" class="image" placeholder="Url da Imagem 1">
+        <p class="error hidden">O valor informado não é uma URL válida</p>
     </div>
     <div class="resposta">
         <input type="text" autocomplete="off" class="answer" placeholder="Resposta incorreta 2">
+        <p class="error hidden">É necessário ter pelo menos uma resposta incorreta</p>
         <input type="text" autocomplete="off" class="image" placeholder="Url da Imagem 2">
+        <p class="error hidden">O valor informado não é uma URL válida</p>
     </div>
     <div class="resposta">
         <input type="text" autocomplete="off" class="answer" placeholder="Resposta incorreta 3">
+        <p class="error hidden">É necessário ter pelo menos uma resposta incorreta</p>
         <input type="text" autocomplete="off" class="image" placeholder="Url da Imagem 3">
+        <p class="error hidden">O valor informado não é uma URL válida</p>
     </div>
 `;
 const levelTemplate = `
 <div class="campos-de-texto">
     <input type="text" autocomplete="off" class="level-title" placeholder="Título do nível">
+    <p class="error hidden">O título deve ter no mínimo 10 caracteres</p>
     <input type="text" autocomplete="off" class="level-percentage" placeholder="% de acerto mínima">
+    <p class="error hidden">Deve ser um valor entre 0 e 100. Um nível é necessário ter valor 0</p>
     <input type="text" autocomplete="off" class="level-image" placeholder="URL da imagem do nível">
+    <p class="error hidden">O valor informado não é uma URL válida</p>
     <textarea class="level-description" placeholder="Descrição do nível"></textarea>
+    <p class="error hidden">A descrição deve ter no mínimo 30 caracteres</p>
 </div>
 `;
 /* Variáveis globais */
@@ -90,12 +104,14 @@ function renderizeQuestions(){
     /**
      * Pega os valores digitados na tela de começo, armazena em variáveis e renderiza na tela de perguntas
      */
+    if(!validateQuizzInfo()){
+        return;
+    }
     const info =  document.querySelector(".comeco .campos-de-texto").children;
-    //Implementar validação depois
     quizz.title = info[0].value;
-    quizz.image = info[1].value;
-    quizzQuestionNumber = Number(info[2].value);
-    quizzLevelNumber = Number(info[3].value);
+    quizz.image = info[2].value;
+    quizzQuestionNumber = Number(info[4].value);
+    quizzLevelNumber = Number(info[6].value);
     startScreen.classList.add("hidden");
     questionScreen.classList.remove("hidden");
     questionList.innerHTML = "";
@@ -160,7 +176,7 @@ function pushQuestions(){
         for(let j=0; j<nonEmptyAnswers.length; j++){
             const answer = answerObject();
             answer.text = nonEmptyAnswers[j].children[0].value;
-            answer.image = nonEmptyAnswers[j].children[1].value;
+            answer.image = nonEmptyAnswers[j].children[2].value;
             if(j == 0){
                 answer.isCorrectAnswer = true;
             }
@@ -238,4 +254,77 @@ function goToQuizz(){
      * A ser implementada
      */
     alert(quizz);
+}
+
+/* Validação */
+//Procurei como validar URLs e encontrei essa função. Não sei se é a melhor forma, mas funciona
+const isValidUrl = urlString=> {
+    const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+  '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+return !!urlPattern.test(urlString);
+}
+
+//Essa aqui eu procurei sobre RegExp (regular expression) e eu acho que entendi o suficiente pra criar. É o suficiente pra sabermos que a cor é valida, tanto no formato quanto no tamanho.
+const validHexColor = (color) => {
+    const hexPattern = new RegExp("^#([A-Fa-f0-9]{3}){1,2}$");
+    return hexPattern.test(color);
+}
+
+function validQuizzTitle(title){
+    const minChar = 20, maxChar = 65;
+    if(title.value.length < minChar || title.length > maxChar){
+        return false;
+    }
+    return true;
+}
+
+function validQuestionNumber(questions){
+    const minNumber = 3;
+    if(questions.value < minNumber || isNaN(questions.value)){
+        return false;
+    }
+    return true;
+}
+
+function validLevelNumber(levels){
+    const minNumber = 2;
+    if(levels.value < minNumber || isNaN(levels.value)){
+        return false;
+    }
+    return true;
+}
+
+function errorFound(element){
+    element.classList.add("input-error");
+    element.nextElementSibling.classList.remove("hidden");
+}
+
+function errorFixed(element){
+    element.classList.remove("input-error");
+    element.nextElementSibling.classList.add("hidden");
+}
+
+function checkError(validation, element){
+    if(!validation){
+        errorFound(element);
+    } else if(validation && element.classList.contains("input-error")){
+        errorFixed(element);
+    }
+}
+
+function validateQuizzInfo(){
+    const title = document.querySelector("#title");
+    const image = document.querySelector("#image");
+    const questions = document.querySelector("#questions");
+    const levels = document.querySelector("#levels");
+    checkError(validQuizzTitle(title), title);
+    checkError(isValidUrl(image.value), image);
+    checkError(validQuestionNumber(questions), questions);
+    checkError(validLevelNumber(levels), levels);
+    isValid = (validQuizzTitle(title) && isValidUrl(image.value) && validQuestionNumber(questions) && validLevelNumber(levels));
+    return isValid;
 }
