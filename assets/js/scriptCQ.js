@@ -51,7 +51,7 @@ const levelTemplate = `
     <p class="error hidden">O título deve ter no mínimo 10 caracteres</p>
     <input type="text" autocomplete="off" class="level-percentage" placeholder="% de acerto mínima">
     <p class="error hidden">Deve ser um valor entre 0 e 100. Um nível é necessário ter valor 0</p>
-    <input type="text" autocomplete="off" class="level-image" placeholder="URL da imagem do nível">
+    <input type="text" autocomplete="off" class="image" placeholder="URL da imagem do nível">
     <p class="error hidden">O valor informado não é uma URL válida</p>
     <textarea class="level-description" placeholder="Descrição do nível"></textarea>
     <p class="error hidden">A descrição deve ter no mínimo 30 caracteres</p>
@@ -187,7 +187,7 @@ function pushQuestions() {
 }
 
 function renderizeLevels() {
-    if(!validateQuestions()) {
+    if (!validateQuestions()) {
         return;
     }
     pushQuestions();
@@ -230,14 +230,17 @@ function pushLevels() {
     for (let i = 0; i < levels.length; i++) {
         const level = levelObject();
         level.title = levels[i].querySelector(".level-title").value;
-        level.image = levels[i].querySelector(".level-image").value;
+        level.image = levels[i].querySelector(".image").value;
         level.text = levels[i].querySelector(".level-description").value;
-        level.minValue = levels[i].querySelector(".level-min-value").value;
+        level.minValue = levels[i].querySelector(".level-percentage").value;
         quizz.levels.push(level);
     }
 }
 
 function endQuizz() {
+    if (!validateLevels()) {
+        return;
+    }
     pushLevels();
     console.log(quizz);
     levelsScreen.classList.add("hidden");
@@ -280,6 +283,14 @@ const validHexColor = (color) => {
 function validQuizzTitle(title) {
     const minChar = 20, maxChar = 65;
     if (title.value.length < minChar || title.length > maxChar) {
+        return false;
+    }
+    return true;
+}
+
+function validLevelTitle(title) {
+    const minChar = 10;
+    if (title.value.length < minChar) {
         return false;
     }
     return true;
@@ -347,20 +358,21 @@ function validateAnswers(answers) {
         const emptyAnswers = answers.filter((answer) => answer.children[0].value == "");
         errorFound(emptyAnswers[0].querySelector(".answer"));
         return false;
-    } else if(answers[0].children[0].value === "") {
+    } else if (answers[0].children[0].value === "") {
         errorFound(answers[0].children[0]);
-        isValid = false;    
+        isValid = false;
     }
 
     for (let i = 0; i < nonEmptyAnswers.length; i++) {
         const url = nonEmptyAnswers[i].querySelector(".image");
         checkError(isValidUrl(url.value), url);
-        if (!isValidUrl(url.value)) { 
+        if (!isValidUrl(url.value)) {
             isValid = false;
         }
     }
-    if(isValid){
-        errorFound(answers[0].children[0]);
+
+    if (isValid) {
+        errorFixed(answers[0].children[0]);
     }
     return isValid;
 }
@@ -378,9 +390,63 @@ function validateQuestions() {
         if (!validQuestion(question) || !validHexColor(color.value) || !validAnswers) {
             isValid = false;
             questions[i].style.border = "1px solid red";
-        } else if(questions[i].style.border === "1px solid red") {
+        } else if (questions[i].style.border === "1px solid red") {
             questions[i].style.border = "none";
         }
+    }
+    return isValid;
+}
+
+function validPercentage(percentage) {
+    const minPercentage = 0, maxPercentage = 100;
+    const percent = Number(percentage.value);
+    const isValid = percent >= minPercentage && percent <= maxPercentage && !isNaN(percent);
+    return isValid;
+}
+
+function validatePercentage() {
+    const percentages = document.querySelectorAll(".level-percentage");
+    let isValid = false;
+    for (let i = 0; i < percentages.length; i++) {
+        if (percentages[i].value === "0") {
+            isValid = true;
+        }
+    }
+    if (!isValid) {
+        Array.prototype.map.call(percentages, percentage => { errorFound(percentage) });
+    } else {
+        Array.prototype.map.call(percentages, percentage => { errorFixed(percentage) });
+    }
+    return isValid;
+}
+
+function validateDescription(description) {
+    const minChar = 30;
+    const isValid = description.value.length >= minChar;
+    return isValid;
+}
+
+function validateLevels() {
+    const levels = document.querySelectorAll(".nivel");
+    let isValid = true;
+    for (let i = 0; i < levels.length; i++) {
+        const levelTitle = levels[i].querySelector(".level-title");
+        const levelImage = levels[i].querySelector(".image");
+        const levelPercentage = levels[i].querySelector(".level-percentage");
+        const levelDescription = levels[i].querySelector(".level-description");
+        checkError(validLevelTitle(levelTitle), levelTitle);
+        checkError(isValidUrl(levelImage.value), levelImage);
+        checkError(validPercentage(levelPercentage), levelPercentage);
+        checkError(validateDescription(levelDescription), levelDescription);
+        if (!validLevelTitle(levelTitle) || !isValidUrl(levelImage.value) || !validPercentage(levelPercentage) || !validateDescription(levelDescription)) {
+            isValid = false;
+            levels[i].style.border = "1px solid red";
+        } else if (levels[i].style.border === "1px solid red") {
+            levels[i].style.border = "none";
+        }
+    }
+    if (isValid) {
+        isValid = validatePercentage();
     }
     return isValid;
 }
