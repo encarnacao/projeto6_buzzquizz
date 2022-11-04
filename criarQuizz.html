@@ -20,10 +20,14 @@
             <div class="input-container">
                 <h1>Comece pelo começo</h1>
                 <div class="campos-de-texto">
-                    <input type="text" autocomplete="off" id="tittle" placeholder="Título do seu quizz">
+                    <input type="text" autocomplete="off" id="title" placeholder="Título do seu quizz">
+                    <p class="error hidden">O título deve ter entre 20 e 65 caracteres</p>
                     <input type="text" autocomplete="off" id="image" placeholder="URL da imagem do seu quizz">
+                    <p class="error hidden">O valor informado não é uma URL válida</p>
                     <input type="text" autocomplete="off" id="questions" placeholder="Quantidade de perguntas do seu quizz">
+                    <p class="error hidden">O quizz deve ter no mínimo 3 perguntas</p>
                     <input type="text" autocomplete="off" id="levels" placeholder="Quantidade de níveis do seu quizz">
+                    <p class="error hidden">O quizz deve ter no mínimo 2 níveis</p>
                 </div>
 
                 <button onclick="renderizeQuestions()">Prosseguir para criar perguntas</button>
