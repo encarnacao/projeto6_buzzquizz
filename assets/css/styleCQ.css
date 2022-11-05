@@ -22,12 +22,12 @@ ul {
     height: 100%;
 }
 
-.error{
+.error {
     color: #EC362D;
     margin-bottom: 17px;
 }
 
-.input-error{
+.input-error {
     background-color: #FFE9E9;
 }
 
@@ -46,25 +46,27 @@ ul {
     padding: 0px 16px;
 }
 
-section h1{
+section h1 {
     margin: 12px 0px 12px 0px;
 }
 
-.resposta{
+.resposta {
     margin: 20px 0px 30px 0px;
 }
 
-.resposta:last-child, .campos-de-texto:last-child{
+.resposta:last-child,
+.campos-de-texto:last-child {
     margin-bottom: 0px;
 }
 
-.titulo ion-icon{
+.titulo ion-icon {
     font-size: 26px;
     --ionicon-stroke-width: 40px;
     color: #000;
 }
 
-.campos-de-texto input,.campos-de-texto textarea{
+.campos-de-texto input,
+.campos-de-texto textarea {
     width: 100%;
     border: 1px solid #D1D1D1;
     border-radius: 5px;
@@ -74,37 +76,40 @@ section h1{
     font-family: 'Roboto', sans-serif;
 }
 
-.campos-de-texto input::placeholder, .campos-de-texto textarea::placeholder{
+.campos-de-texto input::placeholder,
+.campos-de-texto textarea::placeholder {
     color: #bababa;
     font-style: italic;
 }
 
-.campos-de-texto input{
+.campos-de-texto input {
     height: 46px;
 }
-.campos-de-texto textarea{
+
+.campos-de-texto textarea {
     height: 180px;
 }
 
-.campos-de-texto.collapsed{
+.campos-de-texto.collapsed {
     max-height: 0px;
     margin: 0px;
     padding: 0px;
 }
-.collapsed *{
+
+.collapsed * {
     display: none;
 }
 
-.hide-icon ion-icon{
+.hide-icon ion-icon {
     display: none;
 }
 
 
-.voltar{
+.voltar {
     font-size: 18px;
     color: #818181;
     height: 44px;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 9px;
@@ -112,4 +117,21 @@ section h1{
 
 a {
     text-decoration: none;
+}
+
+@media(min-width: 1100px) {
+
+    .comeco .campos-de-texto {
+        width: 42%;
+    }
+
+    ul {
+        margin: 0 auto;
+        width: 42%;
+    }
+
+    li {
+        width: 100%;
+    }
+
 }

@@ -252,11 +252,11 @@ function endQuizz(response) {
     endScreen.classList.remove("hidden");
     const quizzCard = endScreen.querySelector(".quizz-image");
     quizzCard.innerHTML = `
-        <img src="${quizz.image}">
         <div class="titulo-quizz">
             ${quizz.title}
         </div>
     `
+    quizzCard.style.backgroundImage = `url(${quizz.image})`;
 }
 
 function goToQuizz() {
