@@ -3,6 +3,7 @@ const startScreen = document.querySelector('.comeco');
 const questionScreen = document.querySelector('.perguntas');
 const levelsScreen = document.querySelector(".niveis");
 const endScreen = document.querySelector(".quizz-pronto");
+const loadingScreen = document.querySelector(".loading");
 /*Lista de perguntas e níveis*/
 const questionList = document.querySelector(".perguntas ul");
 const levelsList = document.querySelector(".niveis ul");
@@ -237,13 +238,17 @@ function pushLevels() {
     }
 }
 
-function endQuizz() {
-    if (!validateLevels()) {
-        return;
+let quizzId;
+
+function endQuizz(response) {
+    if(localStorage.getItem("quizzes") == null){
+        localStorage.setItem("quizzes", JSON.stringify([]));
     }
-    pushLevels();
-    console.log(quizz);
-    levelsScreen.classList.add("hidden");
+    const quizzes = JSON.parse(localStorage.getItem("quizzes"));
+    quizzId = response.data.id;
+    quizzes.push(quizzId);
+    localStorage.setItem("quizzes", JSON.stringify(quizzes));
+    loadingScreen.classList.add("hidden");
     endScreen.classList.remove("hidden");
     const quizzCard = endScreen.querySelector(".quizz-image");
     quizzCard.innerHTML = `
@@ -252,14 +257,28 @@ function endQuizz() {
             ${quizz.title}
         </div>
     `
-
 }
 
 function goToQuizz() {
     /**
      * A ser implementada
      */
-    alert(quizz);
+    alert("A ser implementada");
+}
+
+function pushQuizz(){
+    if (!validateLevels()) {
+        return;
+    }
+    pushLevels();
+    levelsScreen.classList.add("hidden");
+    loadingScreen.classList.remove("hidden");
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizz);
+    promise.then(endQuizz);
+    promise.catch((error) => {
+        alert("Erro ao criar quizz");
+        window.location.reload();
+    });
 }
 
 /* Validação */
@@ -450,3 +469,4 @@ function validateLevels() {
     }
     return isValid;
 }
+/* -------- */
