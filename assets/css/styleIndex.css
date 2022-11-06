@@ -24,11 +24,6 @@ main {
     align-items: center;
 }
 
-/*YourQuizzes*/
-.YourQuizzes,
-.WithQuizz {
-    display: flex;
-}
 
 /*No Quizz*/
 .NoQuizz {
@@ -157,8 +152,4 @@ main {
     .TitleYourQuizzes {
         justify-content: start;
     }
-}
-
-none {
-    display: none;
 }
