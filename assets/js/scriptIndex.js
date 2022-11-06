@@ -1,7 +1,7 @@
 const feed = document.querySelector('.view');
 const withQuizz = document.querySelector('.WithQuizz');
 const loading = document.querySelector(".loading");
-const container = document.querySelector(".container");
+const container = document.querySelector("section");
 const noQuizz = document.querySelector('.NoQuizz');
 let localQuizzes = localStorage.getItem("quizzes");
 let quizzes;

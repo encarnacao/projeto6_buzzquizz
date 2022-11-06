@@ -176,6 +176,9 @@ button{
     .level-image{
         margin-right: 10px;
     }
+    .level-image img{
+        width: 100%;
+    }
     
 
 }
