@@ -1,4 +1,6 @@
-let feed = document.querySelector('.view')
+const feed = document.querySelector('.view')
+const loading = document.querySelector('.loading');
+const container = document.querySelector('.container');
 let quizzes;
 let id;
 
@@ -10,6 +12,7 @@ function init() {
     promise.then(pullquizzes);
     promise.catch((error) => {
         alert(error);
+        window.location.reload();
     });
 
     /*se não tiver quizz add none em seus quizzes*/
@@ -19,6 +22,8 @@ function init() {
 function pullquizzes(promise) {
     quizzes = promise.data;
     renderizeQuizzes();
+    loading.classList.add("hidden");
+    container.classList.remove("hidden");
 }
 
 function renderizeQuizzes(){

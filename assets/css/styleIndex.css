@@ -104,6 +104,24 @@ main {
     margin-bottom: 14px;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.loading h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background-color: #ec372d96;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 
 /*RESPONSIVIDADE PARA MOBILE*/
 @media all and (min-width: 1100px) {
