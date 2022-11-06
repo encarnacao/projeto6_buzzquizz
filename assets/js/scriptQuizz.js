@@ -12,6 +12,7 @@ function getQuizz(){
     .catch(error =>{
         console.log(error);
         alert("Ocorreu um erro, tente novamente mais tarde");
+        localStorage.clear();
     });
 }
 
