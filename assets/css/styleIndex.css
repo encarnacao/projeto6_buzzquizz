@@ -1,26 +1,32 @@
 main
 {
+    display: flex;
     margin-top: 100px;
+    height: 100%;
     align-items: center;
     background: #FAFAFA;
+    width: 100%;
+    flex-direction: column;
 }
 
-main, .YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes
+.YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes, .table
 {
     display: flex;
     flex-direction: column;
+    width: 80%;
+    height: 100%;
+    align-items: center;
 }
 
 /*YourQuizzes*/
 .YourQuizzes, .WithQuizz
 {
     display: flex;
-
 }
     /*No Quizz*/
     .NoQuizz
     {
-        align-items: center;
+        width: 100%;
         border: 1px dashed #D5D5D5;
     }
 
@@ -52,6 +58,10 @@ main, .YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes
     }
 
     /*With Quizz*/
+    .WithQuizz
+    {
+        width: 100%;
+    }
     .TitleYourQuizzes
     {
         display: flex;
@@ -60,15 +70,23 @@ main, .YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes
     }
     .TitleYourQuizzes ion-icon
     {
+        margin-left: 15px;
         width: 31px;
         height: 30px;
         color: #EC362D;
         cursor: pointer;
     }
 
+    .table
+    {
+        display: flex;
+        justify-content: center;
+        white-space: 15px;
+    }
 
 .All, .TitleYourQuizzes
 {
+    width: 340px;
     padding-top: 35px;
     padding-bottom: 14px;
     font-family: 'Roboto';
@@ -76,18 +94,8 @@ main, .YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes
     font-size: 20px;
     color: #000000;
 }
-.All
-{
-    margin-left: -180px;
-}
 
 /*AllQuizzes*/
-.AllQuizzes
-{
-    background-color: #FAFAFA;
-    
-}
-
 .box
 {
     width: 340px;
@@ -104,6 +112,44 @@ main, .YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes
    text-align: start;
    padding: 19px;
    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+}
+
+/*RESPONSIVIDADE PARA MOBILE*/
+@media all and (min-width: 614px) 
+{
+    main
+    {
+        width: 80%;
+    }
+    .YourQuizzes, .AllQuizzes
+    {
+        width: 100%;
+    }
+    .NoQuizz
+    {
+        width: 100%;
+    }
+    .table
+    {
+        justify-content: left;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .box
+    {
+        margin-left: 7.5px;
+        margin-right: 7.5px;
+    }
+    .All, .TitleYourQuizzes
+    {
+        width: 100%;
+        padding-left: 7.5px;
+    }
+    .TitleYourQuizzes
+    {
+        justify-content: start;
+    }
 }
 
 none
