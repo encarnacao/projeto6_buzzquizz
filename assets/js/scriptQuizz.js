@@ -96,7 +96,7 @@ function selectAnswer(answer){
     answered++;
     if(checkFinished()){
         renderLevel();
-        setTimetou(() => {level.scrollIntoView({behavior: "smooth"});}, 1000);
+        setTimeout(() => {level.scrollIntoView({behavior: "smooth"});}, 1000);
     } else{
         setTimeout(()=>{nextStep.scrollIntoView({behavior: "smooth"});},2000);
     }
