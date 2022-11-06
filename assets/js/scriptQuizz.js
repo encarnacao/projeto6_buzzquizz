@@ -41,7 +41,7 @@ function renderQuestions(){
         questionItem.classList.add("question");
         questionItem.classList.add("card");
         questionItem.innerHTML = `
-            <div class="question-title" style="color:${question.color}">
+            <div class="question-title" style="background-color:${question.color}">
                 <p>${question.title}</p>
             </div>
             <ul class="answers">

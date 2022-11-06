@@ -50,4 +50,18 @@ if(localQuizzes === null){
 }
 else{
     noQuizz.classList.add("hidden");
+    renderizeOwnQuizzes();
+}
+
+function renderizeOwnQuizzes(){
+    localQuizzes = JSON.parse(localQuizzes);
+    const yourQuizzes = document.querySelector(".WithQuizz .table");
+    yourQuizzes.innerHTML = "";
+    for (let i = 0; i < localQuizzes.length; i++) {
+        yourQuizzes.innerHTML += `
+        <div class="quizz-image" id="${localQuizzes[i].id}" onclick="goToQuizz(this)">
+            <p class="titulo-quizz">${localQuizzes[i].title}</p>
+        </div>`;
+        yourQuizzes.children[i].style.backgroundImage = `url(${localQuizzes[i].image})`;
+    }
 }
