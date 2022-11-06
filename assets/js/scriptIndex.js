@@ -29,7 +29,7 @@ function pullquizzes(promise) {
     container.classList.remove("hidden");
 }
 
-function renderizeQuizzes(){
+function renderizeQuizzes() {
     feed.innerHTML = "";
     for (let i = 0; i < quizzes.length; i++) {
         feed.innerHTML += `<div class="quizz-image" id="${quizzes[i].id}" onclick="goToQuizz(this)">
@@ -40,15 +40,28 @@ function renderizeQuizzes(){
 
 }
 
-function goToQuizz(quizz){
+function goToQuizz(quizz) {
     id = quizz.getAttribute("id");
     console.log(id);
     window.location.href = 'quizz.html?id=' + id;
 }
 
-if(localQuizzes === null){
+if (localQuizzes === null) {
     withQuizz.classList.add("hidden");
-}
-else{
+} else {
     noQuizz.classList.add("hidden");
+    renderizeOwnQuizzes();
+}
+
+function renderizeOwnQuizzes() {
+    localQuizzes = JSON.parse(localQuizzes);
+    const yourQuizzes = document.querySelector(".WithQuizz .table");
+    yourQuizzes.innerHTML = "";
+    for (let i = 0; i < localQuizzes.length; i++) {
+        yourQuizzes.innerHTML += `
+        <div class="quizz-image" id="${localQuizzes[i].id}" onclick="goToQuizz(this)">
+            <p class="titulo-quizz">${localQuizzes[i].title}</p>
+        </div>`;
+        yourQuizzes.children[i].style.backgroundImage = `url(${localQuizzes[i].image})`;
+    }
 }
