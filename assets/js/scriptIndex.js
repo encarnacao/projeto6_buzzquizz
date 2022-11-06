@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 const feed = document.querySelector('.view');
 const withQuizz = document.querySelector('.WithQuizz');
 const loading = document.querySelector(".loading");
 const container = document.querySelector("section");
 const noQuizz = document.querySelector('.NoQuizz');
 let localQuizzes = localStorage.getItem("quizzes");
+=======
+const feed = document.querySelector('.view')
+const loading = document.querySelector('.loading');
+const container = document.querySelector('.container');
+>>>>>>> 340b9d6d2e4d42b408a2d9a4ae251dab34918542
 let quizzes;
 let id;
 
@@ -15,6 +21,7 @@ function init() {
     promise.then(pullquizzes);
     promise.catch((error) => {
         alert(error);
+        window.location.reload();
     });
 
     /*se não tiver quizz add none em seus quizzes*/
