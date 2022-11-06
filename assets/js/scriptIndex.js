@@ -1,5 +1,7 @@
 const feed = document.querySelector('.view');
 const withQuizz = document.querySelector('.WithQuizz');
+const loading = document.querySelector(".loading");
+const container = document.querySelector(".container");
 const noQuizz = document.querySelector('.NoQuizz');
 let localQuizzes = localStorage.getItem("quizzes");
 let quizzes;
@@ -22,6 +24,8 @@ function init() {
 function pullquizzes(promise) {
     quizzes = promise.data;
     renderizeQuizzes();
+    loading.classList.add("hidden");
+    container.classList.remove("hidden");
 }
 
 function renderizeQuizzes(){

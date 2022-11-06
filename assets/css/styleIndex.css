@@ -112,6 +112,10 @@ main {
     flex-direction: column;
 }
 
+.container{
+    width:100%;
+}
+
 .loading h2 {
     color: #fff;
     font-size: 20px;
