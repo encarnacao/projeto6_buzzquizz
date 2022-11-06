@@ -1,4 +1,7 @@
-let feed = document.querySelector('.view')
+const feed = document.querySelector('.view');
+const withQuizz = document.querySelector('.WithQuizz');
+const noQuizz = document.querySelector('.NoQuizz');
+let localQuizzes = localStorage.getItem("quizzes");
 let quizzes;
 let id;
 
@@ -24,7 +27,6 @@ function pullquizzes(promise) {
 function renderizeQuizzes(){
     feed.innerHTML = "";
     for (let i = 0; i < quizzes.length; i++) {
-        console.log(quizzes[i]); //printa quizz por quizz
         feed.innerHTML += `<div class="quizz-image" id="${quizzes[i].id}" onclick="goToQuizz(this)">
                                 <p class="titulo-quizz">${quizzes[i].title}</p>
                             </button>`;
@@ -36,5 +38,12 @@ function renderizeQuizzes(){
 function goToQuizz(quizz){
     id = quizz.getAttribute("id");
     console.log(id);
-    window.location.href = 'quizz.html';
+    window.location.href = 'quizz.html?id=' + id;
+}
+
+if(localQuizzes === null){
+    withQuizz.classList.add("hidden");
+}
+else{
+    noQuizz.classList.add("hidden");
 }

@@ -105,10 +105,21 @@ button {
     display: none!important;
 }
 
+.voltar {
+    font-size: 18px;
+    color: #818181;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 9px;
+}
+
 
 @media(min-width: 1100px) {
     button{
-        width: auto;
+        width: fit-content;
+        padding: 0px 50px;
     }
     .quizz-image{
         width: 35%;

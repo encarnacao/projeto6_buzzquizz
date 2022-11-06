@@ -238,15 +238,13 @@ function pushLevels() {
     }
 }
 
-let quizzId;
-
 function endQuizz(response) {
     if(localStorage.getItem("quizzes") == null){
         localStorage.setItem("quizzes", JSON.stringify([]));
     }
     const quizzes = JSON.parse(localStorage.getItem("quizzes"));
-    quizzId = response.data.id;
-    quizzes.push(quizzId);
+    quizz = response.data;
+    quizzes.push(quizz);
     localStorage.setItem("quizzes", JSON.stringify(quizzes));
     loadingScreen.classList.add("hidden");
     endScreen.classList.remove("hidden");
@@ -260,10 +258,7 @@ function endQuizz(response) {
 }
 
 function goToQuizz() {
-    /**
-     * A ser implementada
-     */
-    alert("A ser implementada");
+    window.location.href = `quizz.html?id=${quizz.id}`;
 }
 
 function pushQuizz(){

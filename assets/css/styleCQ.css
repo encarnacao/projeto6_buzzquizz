@@ -104,17 +104,6 @@ section h1 {
     display: none;
 }
 
-
-.voltar {
-    font-size: 18px;
-    color: #818181;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 9px;
-}
-
 a {
     text-decoration: none;
 }
