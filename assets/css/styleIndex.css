@@ -113,7 +113,6 @@ main {
     flex-direction: column;
 }
 
-<<<<<<< HEAD
 section{
     width: 100%; 
     display: flex;
@@ -121,12 +120,6 @@ section{
     align-items: center;
 }
 
-=======
-
-.container{
-    width:100%;
-}
->>>>>>> 340b9d6d2e4d42b408a2d9a4ae251dab34918542
 
 .loading h2 {
     color: #fff;
