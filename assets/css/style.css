@@ -56,11 +56,14 @@ button {
     margin: 20px;
     border-radius: 5px;
     width: 90%;
+    min-width: 340px;
     /*Força o aspect ratio da imagem pra manter ela em paisagem*/
     aspect-ratio: 16/9;
     background-image: url("../images/placeholder.png");
     background-size: cover;
-    background-position: center;    
+    background-position: center; 
+    cursor: pointer;   
+    transition: filter 0.5s ease;
 }
 
 .quizz-image:after {
@@ -75,9 +78,10 @@ button {
     border-radius: 5px;
 }
 
-.quizz-image img {
-    border-radius: 5px;
+.quizz-image:hover{
+    filter:brightness(1.2);
 }
+
 
 .quizz-image .titulo-quizz {
     position: absolute;
@@ -89,11 +93,12 @@ button {
     display: flex;
     padding: 15px;
     font-size: 19px;
-    text-align: center;
+    text-align: left;
     line-height: 22px;
     align-items: center;
     /*z-index para ficar por cima do gradiente, manter abaixo do z-index do header*/
     z-index: 1;
+    word-break: break-all;
 }
 
 .hidden {

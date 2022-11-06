@@ -1,9 +1,8 @@
-*
-{
+* {
     box-sizing: border-box;
 }
-main
-{
+
+main {
     display: flex;
     margin-top: 100px;
     height: 100%;
@@ -13,8 +12,11 @@ main
     flex-direction: column;
 }
 
-.YourQuizzes, .WithQuizz, .NoQuizz, .AllQuizzes, .table
-{
+.YourQuizzes,
+.WithQuizz,
+.NoQuizz,
+.AllQuizzes,
+.table {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -23,73 +25,72 @@ main
 }
 
 /*YourQuizzes*/
-.YourQuizzes, .WithQuizz
-{
+.YourQuizzes,
+.WithQuizz {
     display: flex;
 }
-    /*No Quizz*/
-    .NoQuizz
-    {
-        width: 100%;
-        border: 1px dashed #D5D5D5;
-    }
 
-    .NoQuizz .txt
-    {
-        width: 250px;
-        height: 107px;
-        font-family: 'Roboto';
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 23px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #B9B9B9;
-    }
+/*No Quizz*/
+.NoQuizz {
+    width: 100%;
+    border: 1px dashed #D5D5D5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
 
-    .NoQuizz button
-    {
-        width: 151px;
-        height: 40px;
-        background: #fafafa;
-        border: 1px dashed #EC362D;
-        border-radius: 50px;
-        color: #EC362D;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.NoQuizz .txt {
+    width: 250px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #B9B9B9;
+}
 
-    /*With Quizz*/
-    .WithQuizz
-    {
-        width: 100%;
-    }
-    .TitleYourQuizzes
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .TitleYourQuizzes ion-icon
-    {
-        margin-left: 15px;
-        width: 31px;
-        height: 30px;
-        color: #EC362D;
-        cursor: pointer;
-    }
+.NoQuizz button {
+    width: 151px;
+    height: 40px;
+    background: #fafafa;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+    color: #EC362D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .table
-    {
-        display: flex;
-        justify-content: center;
-        white-space: 15px;
-    }
+/*With Quizz*/
+.WithQuizz {
+    width: 100%;
+}
 
-.All, .TitleYourQuizzes
-{
+.TitleYourQuizzes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.TitleYourQuizzes ion-icon {
+    margin-left: 15px;
+    width: 31px;
+    height: 30px;
+    color: #EC362D;
+    cursor: pointer;
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    white-space: 15px;
+}
+
+.All,
+.TitleYourQuizzes {
     width: 340px;
     padding-top: 35px;
     padding-bottom: 14px;
@@ -100,66 +101,64 @@ main
 }
 
 /*AllQuizzes*/
-.box
-{
-    width: 340px;
-    height: 181px;
+.box {
+    width: 70%;
+    min-width: 340px;
+    aspect-ratio: 16 / 9;
     border-radius: 5px;
     margin-bottom: 14px;
 }
 
-.quizz
-{
-   display: flex;
-   align-items: flex-end;
-   justify-items: flex-start;
-   text-align: start;
-   padding: 19px;
-   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);;
-}
-
 
 /*RESPONSIVIDADE PARA MOBILE*/
-@media all and (min-width: 614px) 
-{
-    main
-    {
+@media all and (min-width: 1100px) {
+    main {
         width: 80%;
     }
-    .YourQuizzes, .AllQuizzes
-    {
+
+    .quizz-image{
+        width: 32%;
+        min-width: auto;
+        margin: 7px;
+    }
+
+    .quizz-image .titulo-quizz{
+        font-size: 1.3vw;
+    }
+
+    .YourQuizzes,
+    .AllQuizzes {
         width: 100%;
     }
-    .NoQuizz
-    {
+
+    .NoQuizz {
         width: 100%;
     }
-    .table
-    {
+
+    .table {
         justify-content: left;
         width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
     }
-    .box
-    {
-        margin-left: 7.5px;
-        margin-right: 7.5px;
+
+    .box {
+        margin: 0px 10px;
+        width: calc(100% - 15px);
+        aspect-ratio: 1000 / 200 ;
     }
-    .All, .TitleYourQuizzes
-    {
+
+    .All,
+    .TitleYourQuizzes {
         width: 100%;
-        padding-left: 7.5px;
+        padding-left: 7px;
     }
-    .TitleYourQuizzes
-    {
+
+    .TitleYourQuizzes {
         justify-content: start;
     }
 }
 
-none
-{
+none {
     display: none;
 }
-
-
