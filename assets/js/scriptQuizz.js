@@ -80,29 +80,38 @@ function arrayScrambler(){
 }
 
 function selectAnswer(answer){
+    const questionCard = answer.parentNode.parentNode;
+    const nextStep = questionCard.nextElementSibling;
     const answers = answer.parentNode.children;
     if(answer.classList.contains("correct")){
         rightAnswers++;
     }
     for(let i=0; i<answers.length; i++){
         answers[i].classList.remove("unclicked");
+        answers[i].removeAttribute("onclick");
         if(answer !== answers[i]){
             answers[i].classList.add("not-selected");
         }
     }
     answered++;
-    checkFinished();
+    if(checkFinished()){
+        renderLevel();
+        setTimetou(() => {level.scrollIntoView({behavior: "smooth"});}, 1000);
+    } else{
+        setTimeout(()=>{nextStep.scrollIntoView({behavior: "smooth"});},2000);
+    }
 }
 
 function checkFinished(){
     if(answered === totalAnswers){
-        renderLevel();
+        return true;
     }
+    return false;
 }
 
 function renderLevel(){
     const levels = quizz.levels;
-    const percentage = rightAnswers/totalAnswers*100;
+    const percentage = Math.floor(rightAnswers/totalAnswers*100);
     let finalLevel, aux=0;
     for(let i=0; i<levels.length; i++){
         console.log(levels[i]);
@@ -114,13 +123,15 @@ function renderLevel(){
     console.log(finalLevel);
     level.innerHTML = `
         <div class="level-title">
-            <p>${finalLevel.title}</p>
+            <p>${percentage}% de acerto: ${finalLevel.title}</p>
         </div>
-        <div class="level-image">
-            <img src=${finalLevel.image}>
-        </div>
-        <div class="level-description">
-            <p>${finalLevel.text}</p>
+        <div class="level-container">
+            <div class="level-image">
+                <img src=${finalLevel.image}>
+            </div>
+            <div class="level-description">
+                <p>${finalLevel.text}</p>
+            </div>
         </div>
     `;
     const final = document.querySelector(".final");

@@ -166,4 +166,16 @@ button{
         padding: 0px 50px;
     }
 
+    .level-container{
+        display: flex;
+    }
+    .level-image,
+    .level-description{
+        width: calc(50% - 5px);
+    }
+    .level-image{
+        margin-right: 10px;
+    }
+    
+
 }
