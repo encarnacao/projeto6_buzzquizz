@@ -27,3 +27,28 @@ function renderQuizz(response) {
     renderHeader();
     renderQuestions();
 }
+
+function renderHeader(){
+    const quizzImage = document.querySelector(".quizz-image");
+    const quizzTitle = document.querySelector(".titulo-quizz");
+    quizzImage.style.backgroundImage = `url(${quizz.image})`;
+    quizzTitle.innerHTML = quizz.title;
+}
+
+function renderQuestions(){
+    for(let i=0; i<quizz.questions.length; i++){
+        const question = quizz.questions[i];
+        const questionItem = document.createElement("li");
+        questionItem.classList.add("question");
+        questionItem.classList.add("card");
+        questionItem.innerHTML = `
+            <div class="question-title" style="background-color:${question.color}">
+                <p>${question.title}</p>
+            </div>
+            <ul class="answers">
+            </ul>
+        `;
+        questionList.appendChild(questionItem);
+        renderAnswers(questionItem, question);
+    }
+}
