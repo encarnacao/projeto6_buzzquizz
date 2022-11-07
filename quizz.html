@@ -8,16 +8,67 @@
     <link rel="shortcut icon" href="assets/images/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/styleQuizz.css">
 </head>
 <body>
     <header>
-        <h1 onclick="window.location.href = 'index.html'">BuzzQuizz</h1>
+        <h1  onclick="window.location.href = 'index.html'">BuzzQuizz</h1>
     </header>
     <main>
-
+        <div class="loading">
+            <img src="assets/images/loading.svg" alt="Carregando...">
+            <h2>Carregando...</h2>
+        </div>
+        <div class="container hidden">
+            <div class="quizz-image">
+                <div>
+                    <p class="titulo-quizz">Titulo do Quizz</p>
+                </div>
+            </div>
+            
+            <ul class="questions">
+                <li class="question card">
+                    <div class="question-title">
+                        <p>Qual é o nome do personagem principal?</p>
+                    </div>
+                    <ul class="answers">
+                        <li class="answer correct unclicked">
+                            <img src="assets/images/answer.png" alt="">
+                            <p>Resposta 1</p>
+                        </li>
+                        <li class="answer wrong unclicked">
+                            <img src="assets/images/answer2.png" alt="">
+                            <p>Resposta 2</p>
+                        </li>
+                        <li class="answer wrong unclicked">
+                            <img src="assets/images/loading.svg" alt="">
+                            <p>Resposta 3</p>
+                        </li>
+                        <li class="answer wrong unclicked">
+                            <img src="assets/images/loading.svg" alt="">
+                            <p>Resposta 4</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="level card">
+                <div class="level-title">
+                    <p>Qual é o nome do personagem principal?</p>
+                </div>
+                <div class="level-container">
+                    <img class="level-image" src="assets/images/placeholder.png" alt="">
+                    <p class="level-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>  
+        </div>
+        <div class="final hidden">
+            <button onclick="window.location.reload();">Reiniciar Quizz</button>
+            <div class="voltar" onclick="window.location.href='index.html'">Voltar pra Home</div>
+        </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="assets/js/scriptQuizz.js"></script>
 </body>
 </html>
