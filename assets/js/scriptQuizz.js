@@ -75,3 +75,30 @@ function renderAnswers(questionItem, question){
         answersList.appendChild(answerItem);
     }
 }
+
+function arrayScrambler(){
+    return 0.5 - Math.random();
+}
+
+function selectAnswer(answer){
+    const questionCard = answer.parentNode.parentNode;
+    const nextStep = questionCard.nextElementSibling;
+    const answers = answer.parentNode.children;
+    if(answer.classList.contains("correct")){
+        rightAnswers++;
+    }
+    for(let i=0; i<answers.length; i++){
+        answers[i].classList.remove("unclicked");
+        answers[i].removeAttribute("onclick");
+        if(answer !== answers[i]){
+            answers[i].classList.add("not-selected");
+        }
+    }
+    answered++;
+    if(checkFinished()){
+        renderLevel();
+        setTimeout(() => {level.scrollIntoView({behavior: "smooth"});}, 1000);
+    } else{
+        setTimeout(()=>{nextStep.scrollIntoView({behavior: "smooth"});},2000);
+    }
+}
