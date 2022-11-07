@@ -14,7 +14,7 @@ const questionTemplate = `
     <input type="text" autocomplete="off" class="question" placeholder="Texto da pergunta">
     <p class="error hidden">A pergunta deve ter no mínimo 20 caracteres</p>
     <input type="text" autocomplete="off" class="color" placeholder="Cor de fundo da pergunta">
-    <p class="error hidden">Não é uma cor válida</p>
+    <p class="error hidden">Não é uma cor em formato válido. (#FFF000)</p>
 </section>
 <section>
     <h1>Resposta correta</h1>
@@ -142,7 +142,7 @@ function renderizeQuestions() {
         questionList.appendChild(question);
         const ionIcon = question.querySelector("ion-icon");
         ionIcon.addEventListener("click", toggleElement);
-   }
+    }
 }
 
 function toggleElement() {
@@ -223,7 +223,7 @@ function renderizeLevels() {
         const ionIcon = level.querySelector("ion-icon");
         ionIcon.addEventListener("click", toggleElement);
 
-   }
+    }
 }
 
 function pushLevels() {
@@ -238,15 +238,13 @@ function pushLevels() {
     }
 }
 
-let quizzId;
-
 function endQuizz(response) {
     if(localStorage.getItem("quizzes") == null){
         localStorage.setItem("quizzes", JSON.stringify([]));
     }
     const quizzes = JSON.parse(localStorage.getItem("quizzes"));
-    quizzId = response.data.id;
-    quizzes.push(quizzId);
+    quizz = response.data;
+    quizzes.push(quizz);
     localStorage.setItem("quizzes", JSON.stringify(quizzes));
     loadingScreen.classList.add("hidden");
     endScreen.classList.remove("hidden");
@@ -260,10 +258,7 @@ function endQuizz(response) {
 }
 
 function goToQuizz() {
-    /**
-     * A ser implementada
-     */
-    alert("A ser implementada");
+    window.location.href = `quizz.html?id=${quizz.id}`;
 }
 
 function pushQuizz(){
@@ -277,7 +272,6 @@ function pushQuizz(){
     promise.then(endQuizz);
     promise.catch((error) => {
         alert("Erro ao criar quizz");
-        //window.location.reload();
         console.log(error);
     });
 }
@@ -296,7 +290,7 @@ const isValidUrl = urlString => {
 
 //Essa aqui eu procurei sobre RegExp (regular expression) e eu acho que entendi o suficiente pra criar. É o suficiente pra sabermos que a cor é valida, tanto no formato quanto no tamanho.
 const validHexColor = (color) => {
-    const hexPattern = new RegExp("^#([A-Fa-f0-9]{3}){1,2}$");
+    const hexPattern = new RegExp("^#([A-Fa-f0-9]{6})$");
     return hexPattern.test(color);
 }
 
