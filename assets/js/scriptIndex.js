@@ -22,6 +22,7 @@ function init() {
 
 function pullquizzes(promise) {
     quizzes = promise.data;
+    console.log(promise);
     renderizeQuizzes();
     loading.classList.add("hidden");
     container.classList.remove("hidden");
@@ -75,17 +76,17 @@ function renderyourQuizzes() {
 }
 
 function deleteQuizzConfirmation(element) {
-    console.log(element);
     if (confirm("Você deseja realmente remover esse quiz?") == true) {
         let id = element.parentNode.parentNode;
         console.log(id);
         let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
         userQuizzes = userQuizzes.filter(userQuizz => userQuizz.id === Number(id));
-        deleteQuizz(element);
+        let quizz = id.children[0];
+        deleteQuizz(quizz);
     }
 }
 
-async function deleteQuizz(quizz) {
+function deleteQuizz(quizz) {
     console.log(quizz);
     try {
         let options = {
@@ -95,15 +96,20 @@ async function deleteQuizz(quizz) {
                 "Secret-Key": quizz.key ? quizz.key : ""
             }
         };
-        let request = await fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.children[0].id, options);
+        let request = fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.id, options);
         if (request.ok) {
-            let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
-            let userQuizz = userQuizzes.filter(userQuizz => userQuizz.id === quizz.id);
-            let indexOf = Array.prototype.indexOf.call(userQuizzes, userQuizz[0]);
-            userQuizzes.splice(indexOf, 1);
-            localStorage.setItem(quizzes, JSON.stringify(quizzes));
+            window.localStorage.removeItem(quizz.data.id);
+            // let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
+            // console.log(userQuizzes);
+            // let userQuizz = userQuizzes.filter(userQuizz => userQuizz.id === quizz.id);
+            // console.log(userQuizz);
+            // let indexOf = Array.prototype.indexOf.call(userQuizzes, userQuizz[0]);
+            // console.log(indexOf);
+            // userQuizzes.splice(indexOf, 1);
+            // localStorage.setItem(quizzes, JSON.stringify(quizzes));
         }
-        renderyourQuizzes();
+        //init();
+        //renderyourQuizzes();
     } catch (error) {
         window.location.reload();
     }
