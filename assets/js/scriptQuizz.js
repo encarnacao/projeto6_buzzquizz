@@ -3,8 +3,10 @@ const loading = document.querySelector(".loading");
 const container = document.querySelector(".container");
 const questionList = document.querySelector("ul.questions");
 const level = document.querySelector(".level");
-console.log("id : " + id);
+//console.log("id : " + id);
 let quizz, totalAnswers, answered = 0, rightAnswers = 0;
+
+getQuizz();
 
 function getQuizz() {
     axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + id)
@@ -139,4 +141,3 @@ function renderLevel(){
     final.classList.remove("hidden");
 }
 
-getQuizz();
