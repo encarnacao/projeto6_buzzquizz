@@ -5,7 +5,7 @@ const WithQuizz = document.querySelector('.WithQuizz');
 const NoQuizz = document.querySelector('.NoQuizz');
 const YourQuizzes = document.querySelector(".WithQuizz .table");
 //let userCreatedQuizzId = JSON.parse(localStorage.getItem("quizzes"))
-let localQuizzes = localStorage.getItem("quizzes");
+let localQuizzes = JSON.parse(localStorage.getItem("quizzes"));
 let quizzes;
 let id;
 
@@ -48,7 +48,7 @@ function goToQuizz(quizz) {
 
 function SyncLayout() {
     /*se não tiver quizz add hidden em seus quizzes*/
-    if (localQuizzes === null || localQuizzes === []) {
+    if (localQuizzes === null || localStorage.quizzes === "[]") {
         WithQuizz.classList.add("hidden");
     } /* senão add none em add hidden em criar quizz*/
     else {
@@ -57,7 +57,6 @@ function SyncLayout() {
     }
 }
 function renderyourQuizzes() {
-    localQuizzes = JSON.parse(localQuizzes);
     //console.log(localQuizzes);
     YourQuizzes.innerHTML = "";
     for (let i = 0; i < localQuizzes.length; i++) {
@@ -80,12 +79,10 @@ function deleteQuizzConfirmation(element) {
         let id = element.parentNode.parentNode;
         //console.log(id);
 
-        let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
-        userQuizzes = userQuizzes.filter(userQuizz => userQuizz.id === Number(id.children[0].id));
-        //console.log(userQuizzes);
-
-        let quizz = id.children[0];
-        deleteQuizz(userQuizzes[0]);
+        let userQuizzes;
+        userQuizzes = localQuizzes.filter(quizz => quizz.id === Number(id.children[0].id));
+        let quizz = userQuizzes[0];
+        deleteQuizz(quizz);
     }
 }
 
@@ -100,28 +97,18 @@ function deleteQuizz(quizz) {
             }
         };
         let request = fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.id, options);
-        // if (request.ok) {
+        request.then(()=> {
             console.log(quizz);
             let x = localQuizzes.indexOf(quizz);
-            console.log(x);
-            console.log(localQuizzes[0] === quizz)
-            localQuizzes = localQuizzes.splice(x,1);
-            console.log(localQuizzes);
+            localQuizzes.splice(x, 1);
             localStorage.quizzes = JSON.stringify(localQuizzes);
-            
-            // let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
-            // console.log(userQuizzes);
-            // let userQuizz = userQuizzes.filter(userQuizz => userQuizz.id === quizz.id);
-            // console.log(userQuizz);
-            // let indexOf = Array.prototype.indexOf.call(userQuizzes, userQuizz[0]);
-            // console.log(indexOf);
-            // userQuizzes.splice(indexOf, 1);
-            // localStorage.setItem(quizzes, JSON.stringify(quizzes));
-        //}
-
-        //init();
-        //renderyourQuizzes();
+            window.location.reload();
+        });
+        request.catch((error) => {
+            alert(error);
+            window.location.reload();
+        });
     } catch (error) {
-        window.location.reload();
+        console.log(error);
     }
 }
