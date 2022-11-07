@@ -30,7 +30,7 @@ function renderizeQuizzes(){
     feed.innerHTML = "";
     for (let i = 0; i < quizzes.length; i++) {
         console.log(quizzes[i]); //printa quizz por quizz
-        feed.innerHTML += `<div class="quizz-image" id="${quizzes[i].id}" onclick="goToQuizz(this)">
+        feed.innerHTML += `<div class="quizz-image box" id="${quizzes[i].id}" onclick="goToQuizz(this)">
                                 <p class="titulo-quizz">${quizzes[i].title}</p>
                             </button>`;
         feed.children[i].style.backgroundImage = `url(${quizzes[i].image})`;
