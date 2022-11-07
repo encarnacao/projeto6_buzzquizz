@@ -245,7 +245,7 @@ function endQuizz(response) {
         localStorage.setItem("quizzes", JSON.stringify([]));
     }
     const quizzes = JSON.parse(localStorage.getItem("quizzes"));
-    quizzId = response.data.id;
+    quizzId = response.data;
     quizzes.push(quizzId);
     localStorage.setItem("quizzes", JSON.stringify(quizzes));
     loadingScreen.classList.add("hidden");
