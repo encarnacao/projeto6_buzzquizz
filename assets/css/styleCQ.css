@@ -122,6 +122,7 @@ a {
 .quizz-image{
     width: 340px;
     height: 181px;
+    margin: 24px 0px;
 }
 
 @media(min-width: 1100px) {
