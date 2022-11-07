@@ -1,6 +1,9 @@
 const feed = document.querySelector('.view')
 const loading = document.querySelector('.loading');
 const container = document.querySelector('.container');
+const WithQuizz = document.querySelector('.WithQuizz');
+const NoQuizz = document.querySelector('.NoQuizz');
+const YourQuizzes = document.querySelector(".WithQuizz .table");
 //let userCreatedQuizzId = JSON.parse(localStorage.getItem("quizzes"))
 let localQuizzes = localStorage.getItem("quizzes");
 let quizzes;
@@ -22,6 +25,7 @@ function pullquizzes(promise) {
     renderizeQuizzes();
     loading.classList.add("hidden");
     container.classList.remove("hidden");
+    SyncLayout();
 }
 
 function renderizeQuizzes() {
@@ -37,7 +41,6 @@ function renderizeQuizzes() {
                             </div>`;
         feed.children[i].style.backgroundImage = `url(${quizzes[i].image})`;
     }
-    SyncLayout();
 }
 
 function goToQuizz(quizz) {
@@ -48,18 +51,29 @@ function goToQuizz(quizz) {
 
 function SyncLayout() {
     /*se não tiver quizz add hidden em seus quizzes*/
-    // if (localQuizzes === null) {
-    //     withQuizz.classList.add("hidden");
-    //     alert();
-    // } /* senão add none em add hidden em criar quizz*/
-    // else {
-    //     alert();
-    //     NoQuizz.classList.add("hidden");
-    //     renderyourQuizzes();
-    // }
+    if (localQuizzes === null) {
+        WithQuizz.classList.add("hidden");
+    } /* senão add none em add hidden em criar quizz*/
+    else {
+        NoQuizz.classList.add("hidden");
+        renderyourQuizzes();
+    }
 }
 function renderyourQuizzes() {
-
+    localQuizzes = JSON.parse(localQuizzes);
+    console.log(localQuizzes);
+    YourQuizzes.innerHTML = "";
+    for (let i = 0; i < localQuizzes.length; i++) {
+        YourQuizzes.innerHTML += `
+                                <div class="quizz-image box" id="${localQuizzes[i].id}" onclick="goToQuizz(this)">
+                                    <p class="titulo-quizz">${localQuizzes[i].title}</p>
+                                    <div class="edit-delete">
+                                        <ion-icon name="create-outline" onclick="deleteQuizz()"></ion-icon>
+                                        <ion-icon name="trash" onclick="deleteQuizz()"></ion-icon>
+                                    </div>
+                                </div>`;
+        YourQuizzes.children[i].style.backgroundImage = `url(${localQuizzes[i].image})`;
+    }
 }
 
 async function deleteQuizz(quizz) {
