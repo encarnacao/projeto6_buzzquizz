@@ -17,42 +17,47 @@
         <h1>BuzzQuizz</h1>
     </header>
     <main>
-        <div class="YourQuizzes">
-            <div class="NoQuizz box">
-                <p class="txt">Você não criou nenhum quizz ainda :(</p>
-                <button onclick="window.location.href = 'criarQuizz.html'">Criar Quizz</button>
-            </div>
-            <div class="WithQuizz">
-                <div class="TitleYourQuizzes">
-                    <p>Seus Quizzes</p>
-                    <ion-icon name="add-circle" onclick="window.location.href = 'criarQuizz.html'"></ion-icon>
+        <div class="loading">
+            <img src="assets/images/loading.svg" alt="Carregando...">
+            <h2>Carregando...</h2>
+        </div>
+        <div class="container hidden">
+            <div class="YourQuizzes">
+                <div class="NoQuizz box">
+                    <p class="txt">Você não criou nenhum quizz ainda :(</p>
+                    <button onclick="window.location.href = 'criarQuizz.html'">Criar Quizz</button>
                 </div>
-                <div class="table">
-                    <button class="box quizz" onclick="window.location.href = 'quizz.html'">
-                        
-                        <p class="NameQuiz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </button>
-                    <button class="box quizz" onclick="window.location.href = 'quizz.html'">
+                <div class="WithQuizz">
+                    <div class="TitleYourQuizzes">
+                        <p>Seus Quizzes</p>
+                        <ion-icon name="add-circle" onclick="window.location.href = 'criarQuizz.html'"></ion-icon>
+                    </div>
+                    <div class="table">
+                        <div class="quizz-image" onclick="window.location.href = 'quizz.html'">
+                            
+                            <p class="titulo-quizz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
+                        </div>
+                        <div class="quizz-image" onclick="window.location.href = 'quizz.html'">
+                            <img src="" alt="">
+                            <p class="titulo-quizz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="AllQuizzes">
+                <p class="All">Todos os Quizzes</p>
+                <div class="table view">
+                    <div class="quizz-image" onclick="window.location.href = 'quizz.html'">
                         <img src="" alt="">
-                        <p class="NameQuiz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </button>
+                        <p class="titulo-quizz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
+                    </div>
+                    <div class="quizz-image" onclick="window.location.href = 'quizz.html'">
+                        <img src="TumbQuizz" alt="">
+                        <p class="titulo-quizz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="AllQuizzes">
-            <p class="All">Todos os Quizzes</p>
-            <div class="table view">
-                <button class="box quizz" onclick="window.location.href = 'quizz.html'">
-                    <img src="" alt="">
-                    <p class="NameQuiz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
-                </button>
-                <button class="box quizz" onclick="window.location.href = 'quizz.html'">
-                    <img src="TumbQuizz" alt="">
-                    <p class="NameQuiz">Acerto os personagens corretos dos Simpsons e prove seu amor!</p>
-                </button>
-            </div>
-        </div>
-
     </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
