@@ -27,6 +27,7 @@ header h1 {
     color: #fff;
     font-size: 37px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 main {

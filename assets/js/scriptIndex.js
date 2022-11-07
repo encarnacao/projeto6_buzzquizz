@@ -34,10 +34,6 @@ function renderizeQuizzes() {
         //console.log(quizzes[i]); //printa quizz por quizz
         feed.innerHTML += `<div class="quizz-image box" id="${quizzes[i].id}" onclick="goToQuizz(this)">
                                 <p class="titulo-quizz">${quizzes[i].title}</p>
-                                <div class="edit-delete">
-                                    <ion-icon name="create-outline" onclick="deleteQuizz()"></ion-icon>
-                                    <ion-icon name="trash" onclick="deleteQuizz()"></ion-icon>
-                                </div>
                             </div>`;
         feed.children[i].style.backgroundImage = `url(${quizzes[i].image})`;
     }
@@ -61,7 +57,7 @@ function SyncLayout() {
 }
 function renderyourQuizzes() {
     localQuizzes = JSON.parse(localQuizzes);
-    console.log(localQuizzes);
+    //console.log(localQuizzes);
     YourQuizzes.innerHTML = "";
     for (let i = 0; i < localQuizzes.length; i++) {
         YourQuizzes.innerHTML += `
@@ -88,13 +84,9 @@ async function deleteQuizz(quizz) {
         };
         let request = await fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.id, options);
         if (request.ok) {
-            let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
-            let userQuizz = userQuizzes.filter(userQuizz => userQuizz.id === quizz.id);
-            let indexOf = Array.prototype.indexOf.call(userQuizzes, userQuizz[0]);
-            userQuizzes.splice(indexOf, 1);
-            localStorage.setItem(myQuizzes, JSON.stringify(userQuizzes));
+            localStorage.setItem(quizzes, JSON.stringify(quizzes));
         }
-        renderizeQuizzes();
+        init();
     } catch (error) {
         window.location.reload();
     }
