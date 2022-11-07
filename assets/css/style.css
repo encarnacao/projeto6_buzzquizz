@@ -97,6 +97,11 @@ button {
     word-break: break-all;
 }
 
+.extern
+{
+    position: relative;
+}
+
 .hidden {
     display: none!important;
 }

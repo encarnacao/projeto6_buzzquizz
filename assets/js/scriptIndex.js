@@ -61,14 +61,27 @@ function renderyourQuizzes() {
     YourQuizzes.innerHTML = "";
     for (let i = 0; i < localQuizzes.length; i++) {
         YourQuizzes.innerHTML += `
-                                <div class="quizz-image box" id="${localQuizzes[i].id}" onclick="goToQuizz(this)">
-                                    <p class="titulo-quizz">${localQuizzes[i].title}</p>
+                                <div class="extern">
+                                    <div class="quizz-image box" id="${localQuizzes[i].id}" onclick="goToQuizz(this)">
+                                        <p class="titulo-quizz">${localQuizzes[i].title}</p> 
+                                    </div>
                                     <div class="edit-delete">
-                                        <ion-icon name="create-outline" onclick="deleteQuizz()"></ion-icon>
-                                        <ion-icon name="trash" onclick="deleteQuizz()"></ion-icon>
+                                        <ion-icon name="create-outline" onclick="deleteQuizzConfirmation(this)"></ion-icon>
+                                        <ion-icon name="trash" onclick="deleteQuizzConfirmation(this)"></ion-icon>
                                     </div>
                                 </div>`;
-        YourQuizzes.children[i].style.backgroundImage = `url(${localQuizzes[i].image})`;
+        YourQuizzes.children[i].children[0].style.backgroundImage = `url(${localQuizzes[i].image})`;
+    }
+}
+
+function deleteQuizzConfirmation(element) {
+    console.log(element);
+    if (confirm("Você deseja realmente remover esse quiz?") == true) {
+        let id = element.parentNode.parentNode;
+        console.log(id);
+        let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
+        userQuizzes = userQuizzes.filter(userQuizz => userQuizz.id === Number(id));
+        deleteQuizz(element);
     }
 }
 
@@ -82,13 +95,16 @@ async function deleteQuizz(quizz) {
                 "Secret-Key": quizz.key ? quizz.key : ""
             }
         };
-        let request = await fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.id, options);
+        let request = await fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.children[0].id, options);
         if (request.ok) {
+            let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
+            let userQuizz = userQuizzes.filter(userQuizz => userQuizz.id === quizz.id);
+            let indexOf = Array.prototype.indexOf.call(userQuizzes, userQuizz[0]);
+            userQuizzes.splice(indexOf, 1);
             localStorage.setItem(quizzes, JSON.stringify(quizzes));
         }
-        init();
+        renderyourQuizzes();
     } catch (error) {
         window.location.reload();
     }
-
 }
