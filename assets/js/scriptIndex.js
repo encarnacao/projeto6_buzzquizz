@@ -77,7 +77,7 @@ function renderyourQuizzes() {
 }
 
 async function deleteQuizz(quizz) {
-    alert();
+    console.log(quizz);
     try {
         let options = {
             method: "DELETE",
@@ -94,7 +94,7 @@ async function deleteQuizz(quizz) {
             userQuizzes.splice(indexOf, 1);
             localStorage.setItem(myQuizzes, JSON.stringify(userQuizzes));
         }
-        await renderizeQuizzes();
+        renderizeQuizzes();
     } catch (error) {
         window.location.reload();
     }

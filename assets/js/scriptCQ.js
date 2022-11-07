@@ -142,7 +142,7 @@ function renderizeQuestions() {
         questionList.appendChild(question);
         const ionIcon = question.querySelector("ion-icon");
         ionIcon.addEventListener("click", toggleElement);
-    }
+   }
 }
 
 function toggleElement() {
@@ -223,7 +223,7 @@ function renderizeLevels() {
         const ionIcon = level.querySelector("ion-icon");
         ionIcon.addEventListener("click", toggleElement);
 
-    }
+   }
 }
 
 function pushLevels() {
@@ -277,7 +277,8 @@ function pushQuizz(){
     promise.then(endQuizz);
     promise.catch((error) => {
         alert("Erro ao criar quizz");
-        window.location.reload();
+        //window.location.reload();
+        console.log(error);
     });
 }
 
