@@ -48,7 +48,7 @@ function goToQuizz(quizz) {
 
 function SyncLayout() {
     /*se não tiver quizz add hidden em seus quizzes*/
-    if (localQuizzes === null) {
+    if (localQuizzes === null || localQuizzes === []) {
         WithQuizz.classList.add("hidden");
     } /* senão add none em add hidden em criar quizz*/
     else {
@@ -78,16 +78,19 @@ function renderyourQuizzes() {
 function deleteQuizzConfirmation(element) {
     if (confirm("Você deseja realmente remover esse quiz?") == true) {
         let id = element.parentNode.parentNode;
-        console.log(id);
+        //console.log(id);
+
         let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
-        userQuizzes = userQuizzes.filter(userQuizz => userQuizz.id === Number(id));
+        userQuizzes = userQuizzes.filter(userQuizz => userQuizz.id === Number(id.children[0].id));
+        //console.log(userQuizzes);
+
         let quizz = id.children[0];
-        deleteQuizz(quizz);
+        deleteQuizz(userQuizzes[0]);
     }
 }
 
 function deleteQuizz(quizz) {
-    console.log(quizz);
+    //console.log(quizz);
     try {
         let options = {
             method: "DELETE",
@@ -97,8 +100,15 @@ function deleteQuizz(quizz) {
             }
         };
         let request = fetch("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/" + quizz.id, options);
-        if (request.ok) {
-            window.localStorage.removeItem(quizz.data.id);
+        // if (request.ok) {
+            console.log(quizz);
+            let x = localQuizzes.indexOf(quizz);
+            console.log(x);
+            console.log(localQuizzes[0] === quizz)
+            localQuizzes = localQuizzes.splice(x,1);
+            console.log(localQuizzes);
+            localStorage.quizzes = JSON.stringify(localQuizzes);
+            
             // let userQuizzes = JSON.parse(localStorage.getItem("quizzes"));
             // console.log(userQuizzes);
             // let userQuizz = userQuizzes.filter(userQuizz => userQuizz.id === quizz.id);
@@ -107,7 +117,8 @@ function deleteQuizz(quizz) {
             // console.log(indexOf);
             // userQuizzes.splice(indexOf, 1);
             // localStorage.setItem(quizzes, JSON.stringify(quizzes));
-        }
+        //}
+
         //init();
         //renderyourQuizzes();
     } catch (error) {
