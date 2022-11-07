@@ -102,3 +102,41 @@ function selectAnswer(answer){
         setTimeout(()=>{nextStep.scrollIntoView({behavior: "smooth"});},2000);
     }
 }
+
+function checkFinished(){
+    if(answered === totalAnswers){
+        return true;
+    }
+    return false;
+}
+
+function renderLevel(){
+    const levels = quizz.levels;
+    const percentage = Math.floor(rightAnswers/totalAnswers*100);
+    let finalLevel, aux=0;
+    for(let i=0; i<levels.length; i++){
+        //console.log(levels[i]);
+        if(percentage >= levels[i].minValue && levels[i].minValue >= aux){
+            finalLevel = levels[i];
+            aux = levels[i].minValue;
+        }
+    }
+    console.log(finalLevel);
+    level.innerHTML = `
+        <div class="level-title">
+            <p>${percentage}% de acerto: ${finalLevel.title}</p>
+        </div>
+        <div class="level-container">
+            <div class="level-image">
+                <img src=${finalLevel.image}>
+            </div>
+            <div class="level-description">
+                <p>${finalLevel.text}</p>
+            </div>
+        </div>
+    `;
+    const final = document.querySelector(".final");
+    final.classList.remove("hidden");
+}
+
+getQuizz();
