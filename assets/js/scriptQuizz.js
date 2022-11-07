@@ -52,3 +52,26 @@ function renderQuestions(){
         renderAnswers(questionItem, question);
     }
 }
+
+function renderAnswers(questionItem, question){
+    const answersList = questionItem.querySelector("ul.answers");
+    const answers = question.answers;
+    answers.sort(arrayScrambler);
+    for(let i=0; i<answers.length; i++){
+        const answer = answers[i];
+        const answerItem = document.createElement("li");
+        answerItem.classList.add("answer");
+        answerItem.classList.add("unclicked");
+        if(answer.isCorrectAnswer){
+            answerItem.classList.add("correct");
+        } else{
+            answerItem.classList.add("wrong");
+        }   
+        answerItem.innerHTML = `
+        <img src=${answer.image}>
+        <p>${answer.text}</p>
+        `;
+        answerItem.setAttribute("onclick", "selectAnswer(this)");
+        answersList.appendChild(answerItem);
+    }
+}
